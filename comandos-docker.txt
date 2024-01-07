@@ -1,0 +1,11 @@
+docker build -t ms-hello-world:latest .
+docker run -p 8080:8080 -d ms-hello-world:latest
+docker tag ms-hello-world:latest eisner271190/ms-hello-world:latest
+docker push eisner271190/ms-hello-world:latest
+
+docker build -t r-hello-world:latest .
+docker run -p 8081:8081 -d r-hello-world:latest
+docker tag r-hello-world:latest eisner271190/r-hello-world:latest
+docker push eisner271190/r-hello-world:latest
+
+docker-compose up -d

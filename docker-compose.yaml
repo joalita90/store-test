@@ -1,0 +1,113 @@
+version: '3.8'
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: y3k$9Xt#bR!sD@rK!
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+    networks:
+      network-db-ms:
+        aliases:
+          - network_ms
+
+  spring-boot-app:
+    image: eisner271190/ms-hello-world
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sql-server
+    networks:
+      network-db-ms:
+        aliases:
+          - network_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+
+  sb-ms-1:
+    image: eisner271190/ms-1
+    ports:
+      - "8081:8081"
+    depends_on:
+      - sql-server
+    networks:
+      network-db-ms:
+        aliases:
+          - network_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+      
+  sb-ms-2:
+    image: eisner271190/ms-2
+    ports:
+      - "8082:8082"
+    depends_on:
+      - sql-server
+    networks:
+      network-db-ms:
+        aliases:
+          - network_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+      
+  sb-ms-3:
+    image: eisner271190/ms-3
+    ports:
+      - "8083:8083"
+    depends_on:
+      - sql-server
+    networks:
+      network-db-ms:
+        aliases:
+          - network_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+      
+  sb-ms-4:
+    image: eisner271190/ms-4
+    ports:
+      - "8084:8084"
+    depends_on:
+      - sql-server
+    networks:
+      network-db-ms:
+        aliases:
+          - network_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+
+networks:
+  network-db-ms:
+    name: net-db-ms
+    driver: bridge
+    ipam: 
+       driver: default
+
+  # hola-mundo-react-app:
+  #   image: node:14-alpine
+  #   working_dir: /app
+  #   command: ["npm", "start"]
+  #   volumes:
+  #       - ./hola-mundo-react:/app
+  #   ports:
+  #       - "3000:3000"
+  #   depends_on:
+  #       - nginx-server
+
+  # nginx-server:
+  #   image: nginx:alpine
+  #   volumes:
+  #       - ./hola-mundo-react/build:/usr/share/nginx/html
+  #   ports:
+  #       - "8081:8081"
