@@ -1,7 +1,21 @@
 version: '3.8'
 services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-store
+    environment:
+      MYSQL_ROOT_PASSWORD: y3k$9Xt#bR!sD@rK!
+      MYSQL_DATABASE: storeDb
+      MYSQL_USER: userdbstore
+      MYSQL_PASSWORD: y3k$9Xt#bR!sD@rK!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
   sql-server:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql-server-store
     environment:
       SA_PASSWORD: y3k$9Xt#bR!sD@rK!
       ACCEPT_EULA: Y
@@ -12,8 +26,9 @@ services:
         aliases:
           - network_ms
 
-  spring-boot-app:
-    image: eisner271190/ms-hello-world
+  ms-store:
+    image: joallyzg/ms-store
+    container_name: ms-store
     ports:
       - "8080:8080"
     depends_on:
@@ -26,67 +41,26 @@ services:
       SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
       SPRING_DATASOURCE_USERNAME: sa
       SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+      MYSQL_ROOT_PASSWORD: y3k$9Xt#bR!sD@rK!
+      MYSQL_DATABASE: storeDb
+      MYSQL_USER: userdbstore
+      MYSQL_PASSWORD: y3k$9Xt#bR!sD@rK!
 
-  sb-ms-1:
-    image: eisner271190/ms-1
+  app-store:
+    image: joallyzg/app-store
+    container_name: app-store
     ports:
-      - "8081:8081"
+        - "3000:3000"
     depends_on:
-      - sql-server
-    networks:
-      network-db-ms:
-        aliases:
-          - network_db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
-      
-  sb-ms-2:
-    image: eisner271190/ms-2
-    ports:
-      - "8082:8082"
-    depends_on:
-      - sql-server
-    networks:
-      network-db-ms:
-        aliases:
-          - network_db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
-      
-  sb-ms-3:
-    image: eisner271190/ms-3
-    ports:
-      - "8083:8083"
-    depends_on:
-      - sql-server
-    networks:
-      network-db-ms:
-        aliases:
-          - network_db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
-      
-  sb-ms-4:
-    image: eisner271190/ms-4
-    ports:
-      - "8084:8084"
-    depends_on:
-      - sql-server
-    networks:
-      network-db-ms:
-        aliases:
-          - network_db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+        - nginx-server
 
+  nginx-server:
+    image: nginx:alpine
+    container_name: nginx-store
+    volumes:
+        - ./build:/usr/share/nginx/html
+    ports:
+        - "81:80"
 networks:
   network-db-ms:
     name: net-db-ms
@@ -94,20 +68,5 @@ networks:
     ipam: 
        driver: default
 
-  # hola-mundo-react-app:
-  #   image: node:14-alpine
-  #   working_dir: /app
-  #   command: ["npm", "start"]
-  #   volumes:
-  #       - ./hola-mundo-react:/app
-  #   ports:
-  #       - "3000:3000"
-  #   depends_on:
-  #       - nginx-server
-
-  # nginx-server:
-  #   image: nginx:alpine
-  #   volumes:
-  #       - ./hola-mundo-react/build:/usr/share/nginx/html
-  #   ports:
-  #       - "8081:8081"
+volumes:
+  mysql_data:
