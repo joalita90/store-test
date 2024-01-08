@@ -12,6 +12,10 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      network-db-ms:
+        aliases:
+          - network_ms
 
   sql-server:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -33,16 +37,17 @@ services:
       - "8080:8080"
     depends_on:
       - sql-server
+      - mysql
     networks:
       network-db-ms:
         aliases:
-          - network_db
+          - network_db_sqlserver
+          - network_db_mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
-      MYSQL_ROOT_PASSWORD: y3k$9Xt#bR!sD@rK!
-      MYSQL_DATABASE: storeDb
+      #SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
+      #SPRING_DATASOURCE_USERNAME: sa
+      #SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
+      MYSQL_DATASOURCE_URL: jdbc:mysql://mysql:3306/storeDb
       MYSQL_USER: userdbstore
       MYSQL_PASSWORD: y3k$9Xt#bR!sD@rK!
 
