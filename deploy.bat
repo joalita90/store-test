@@ -1,12 +1,5 @@
 set PATH_ROOT=%CD%
 
-REM setx MYSQL_DATASOURCE_URL jdbc:mysql://mysql:3306/storeDb /M
-REM setx MYSQL_DATASOURCE_URL jdbc:mysql://mysql:3306/storeDb
-REM setx MYSQL_USER userdbstore /M
-REM setx MYSQL_USER userdbstore
-REM setx MYSQL_PASSWORD y3k$9Xt#bR!sD@rK! /M
-REM setx MYSQL_PASSWORD y3k$9Xt#bR!sD@rK!
-
 CD store-backend
 docker build -t ms-store:latest .
 docker run --name ms-store -p 8080:8080 -d ms-store:latest

@@ -9,8 +9,8 @@ COPY package.json .
 COPY package-lock.json .
 COPY ./build /app/build
 
-RUN npm ci
 COPY . .
+RUN npm install
 RUN npm run build
 EXPOSE 3000
 

@@ -1,0 +1,15 @@
+server: storejgz-server-db
+user: userdbstorejzg
+pass: y3k$9Xt#bR!sD@rK!
+
+hostname=storejgz-server-db.mysql.database.azure.com
+username=userdbstorejzg
+password={your-password}
+ssl-mode=require
+
+REM setx MYSQL_DATASOURCE_URL jdbc:mysql://mysql:3306/storeDb /M
+REM setx MYSQL_DATASOURCE_URL jdbc:mysql://mysql:3306/storeDb
+REM setx MYSQL_USER userdbstore /M
+REM setx MYSQL_USER userdbstore
+REM setx MYSQL_PASSWORD y3k$9Xt#bR!sD@rK! /M
+REM setx MYSQL_PASSWORD y3k$9Xt#bR!sD@rK!
