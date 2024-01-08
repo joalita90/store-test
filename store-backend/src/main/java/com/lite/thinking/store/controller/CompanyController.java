@@ -2,7 +2,6 @@ package com.lite.thinking.store.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,5 +49,4 @@ public class CompanyController {
     public void delete(@PathVariable int id) {
         companyService.delete(id);
     }
-
 }
