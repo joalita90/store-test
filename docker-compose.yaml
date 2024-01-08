@@ -17,18 +17,18 @@ services:
         aliases:
           - network_ms
 
-  sql-server:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sql-server-store
-    environment:
-      SA_PASSWORD: y3k$9Xt#bR!sD@rK!
-      ACCEPT_EULA: Y
-    ports:
-      - "1433:1433"
-    networks:
-      network-db-ms:
-        aliases:
-          - network_ms
+  # sql-server:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   container_name: sql-server-store
+  #   environment:
+  #     SA_PASSWORD: y3k$9Xt#bR!sD@rK!
+  #     ACCEPT_EULA: Y
+  #   ports:
+  #     - "1433:1433"
+    # networks:
+    #   network-db-ms:
+    #     aliases:
+    #       - network_ms
 
   ms-store:
     image: joallyzg/ms-store
@@ -36,12 +36,11 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - sql-server
+      # - sql-server
       - mysql
     networks:
       network-db-ms:
         aliases:
-          - network_db_sqlserver
           - network_db_mysql
     environment:
       #SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
