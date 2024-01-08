@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
 const Inventario = () => {
-    // Estado local para almacenar la lista de productos
     const [productos, setProductos] = useState([]);
 
-    // Ejemplo de efecto para cargar la lista de productos (puedes ajustar según tu lógica)
     useEffect(() => {
-        // Simulación de carga de productos desde una API
         const obtenerProductosDesdeAPI = async () => {
-            // Realiza la lógica de solicitud a tu API aquí
-            // Por ejemplo, fetch('URL_DE_TU_API/productos')
-            // const data = await response.json();
-            // setProductos(data);
+            try {
+                // Realiza la solicitud a tu API de productos
+                const response = await fetch('http://localhost:8080/api/product');
+                
+                // Verifica si la solicitud fue exitosa (código de estado 200)
+                if (response.ok) {
+                    const data = await response.json();
+                    setProductos(data);
+                } else {
+                    console.error('Error al obtener productos:', response.status);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+            }
         };
 
         obtenerProductosDesdeAPI();
-    }, []); // Se ejecutará solo una vez al montar el componente
+    }, []);
 
     return (
         <div>
@@ -24,6 +31,7 @@ const Inventario = () => {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Código</th>
                         <th>Nombre</th>
                         <th>Características</th>
                         {/* Agrega más encabezados según sea necesario */}
@@ -33,6 +41,7 @@ const Inventario = () => {
                     {productos.map((producto) => (
                         <tr key={producto.id}>
                             <td>{producto.id}</td>
+                            <td>{producto.code}</td>
                             <td>{producto.name}</td>
                             <td>{producto.properties}</td>
                             {/* Agrega más celdas según sea necesario */}

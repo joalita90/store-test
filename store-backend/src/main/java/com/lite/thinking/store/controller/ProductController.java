@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lite.thinking.store.model.Product;
+import com.lite.thinking.store.dto.ProductDto;
+
 import com.lite.thinking.store.services.ProductService;
 
 @RestController
@@ -25,27 +26,32 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(value = "/", produces = "application/json")
-    public List<Product> getProducts() {
+    @GetMapping
+    public List<ProductDto> getProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping(value = "/new", consumes = "application/json", produces = "application/json")
-    public Product save(@RequestBody Product product) {
+    @PostMapping
+    public ProductDto save(@RequestBody ProductDto product) {
         return productService.save(product);
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public Product get(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public ProductDto get(@PathVariable int id) {
         return productService.getById(id);
     }
+    
+    @GetMapping("/company/{id}")
+    public List<ProductDto> getProductsById(@PathVariable int id) {
+        return productService.getProductsById(id);
+    }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public Product update(@PathVariable int id, @RequestBody Product product) {
+    @PutMapping("/{id}")
+    public ProductDto update(@PathVariable int id, @RequestBody ProductDto product) {
         return productService.update(id, product);
     }
 
-    @DeleteMapping(value = "/{id}", produces = "application/json")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
     	productService.delete(id);
     }
