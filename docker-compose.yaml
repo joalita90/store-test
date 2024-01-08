@@ -16,19 +16,13 @@ services:
       network-db-ms:
         aliases:
           - network_ms
-
-  # sql-server:
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
-  #   container_name: sql-server-store
-  #   environment:
-  #     SA_PASSWORD: y3k$9Xt#bR!sD@rK!
-  #     ACCEPT_EULA: Y
-  #   ports:
-  #     - "1433:1433"
-    # networks:
-    #   network-db-ms:
-    #     aliases:
-    #       - network_ms
+  nginx-server:
+    image: nginx:alpine
+    container_name: nginx-store
+    volumes:
+        - ./build:/usr/share/nginx/html
+    ports:
+        - "81:80"
 
   ms-store:
     image: joallyzg/ms-store
@@ -36,16 +30,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      # - sql-server
       - mysql
     networks:
       network-db-ms:
         aliases:
           - network_db_mysql
     environment:
-      #SPRING_DATASOURCE_URL: jdbc:sqlserver://sql-server:1433;databaseName=storeDb;
-      #SPRING_DATASOURCE_USERNAME: sa
-      #SPRING_DATASOURCE_PASSWORD: y3k$9Xt#bR!sD@rK!
       MYSQL_DATASOURCE_URL: jdbc:mysql://mysql:3306/storeDb
       MYSQL_USER: userdbstore
       MYSQL_PASSWORD: y3k$9Xt#bR!sD@rK!
@@ -58,13 +48,6 @@ services:
     depends_on:
         - nginx-server
 
-  nginx-server:
-    image: nginx:alpine
-    container_name: nginx-store
-    volumes:
-        - ./build:/usr/share/nginx/html
-    ports:
-        - "81:80"
 networks:
   network-db-ms:
     name: net-db-ms
