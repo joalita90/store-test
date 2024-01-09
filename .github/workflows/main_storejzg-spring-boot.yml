@@ -26,6 +26,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
+          cd ${{ github.workspace }}
           echo $(pwd)
           chmod +x gradlew
           ./gradlew clean build -x test --no-daemon
