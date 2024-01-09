@@ -24,7 +24,6 @@ jobs:
       - name: Change app location and Build with Gradle
         run: |
           cd ${{ github.workspace }}/store-backend
-          cd ${{ github.workspace }}
           echo $(pwd)
           chmod +x gradlew
           ./gradlew clean build -x test --no-daemon
@@ -45,8 +44,7 @@ jobs:
     steps:
       - name: Change app location
         run: |
-          cd ${{ github.workspace }}/store-backend
-          cd ${{ github.workspace }}
+          cd ${{ github.workspace }}/store-backend/target/
           echo $(pwd)
           
       - name: Download artifact from build job
