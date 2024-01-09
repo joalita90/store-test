@@ -22,6 +22,7 @@ public class OrderEntity {
     private int id;
 
     private String date;
+    private float total;
 
     @ManyToOne
     @JoinColumn(name = "idClient")

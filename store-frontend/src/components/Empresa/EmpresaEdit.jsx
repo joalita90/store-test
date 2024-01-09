@@ -4,10 +4,10 @@ import Swal from 'sweetalert2';
 const EmpresaEdit = ({ empresas, selectedEmpresa, setEmpresas, setIsEditing }) => {
   const id = selectedEmpresa.id;
 
-  const [nit, setNit] = useState('');
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  const [nit, setNit] = useState(selectedEmpresa.nit);
+  const [name, setName] = useState(selectedEmpresa.name);
+  const [address, setAddress] = useState(selectedEmpresa.address);
+  const [phone, setPhone] = useState(selectedEmpresa.phone);
 
   const handleUpdate = e => {
     e.preventDefault();

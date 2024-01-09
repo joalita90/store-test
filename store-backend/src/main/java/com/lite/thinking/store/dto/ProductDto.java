@@ -13,9 +13,9 @@ public class ProductDto {
 	private String code;
 	private String name;
 	private String properties;		
-    private List<PriceDto> prices;		
-	private CompanyDto company;	
-	private CategoryDto category;
+	private float price;		
+	//private CompanyDto company;	
+	//private CategoryDto category;
 	//private List<OrderEntity> orderList;
 
 }

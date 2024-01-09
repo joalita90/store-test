@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
+const ProductoTable = ({ productos, handleEdit, handleDelete }) => {
 
   return (
     <div className="contain-table">
@@ -8,10 +8,10 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
         <thead>
           <tr>
             <th>No.</th>
-            <th>Nit</th>
+            <th>Código</th>
             <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
+            <th>Caracteristicas</th>
+            <th>Precio</th>
             
             <th colSpan={2} className="text-center">
               Actions
@@ -19,18 +19,18 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {empresas.length > 0 ? (
-            empresas.map((empresa, i) => (
-              <tr key={empresa.id}>
+          {productos.length > 0 ? (
+            productos.map((producto, i) => (
+              <tr key={producto.id}>
                 <td>{i + 1}</td>
-                <td>{empresa.nit}</td>
-                <td>{empresa.name}</td>
-                <td>{empresa.address}</td>                
-                <td>{empresa.phone} </td>
+                <td>{producto.code}</td>
+                <td>{producto.name}</td>
+                <td>{producto.properties}</td>
+                <td>$ {producto.price}</td>
 
                 <td className="text-right">
                   <button
-                    onClick={() => handleEdit(empresa.id)}
+                    onClick={() => handleEdit(producto.id)}
                     className="button muted-button"
                   >
                     Editar
@@ -38,7 +38,7 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
                 </td>
                 <td className="text-left">
                   <button
-                    onClick={() => handleDelete(empresa.id)}
+                    onClick={() => handleDelete(producto.id)}
                     className="button muted-button"
                   >
                     Eliminar
@@ -57,4 +57,4 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
   );
 };
 
-export default EmpresaTable;
+export default ProductoTable;

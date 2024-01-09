@@ -5,13 +5,13 @@ import EmpresaTable from './EmpresaTable';
 import EmpresaAdd from './EmpresaAdd';
 import EmpresaEdit from './EmpresaEdit';
 
-const Empresa = ({ setIsAuthenticated }) => {
+const Empresa = ({apiUrl, setIsAuthenticated }) => {
   const [empresas, setEmpresas] = useState([]);
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const urlApi = 'http://localhost:8080/api/companies';
+  const urlApi = apiUrl + 'api/companies';
 
   const obtenerData = async () => {
     try {        
@@ -20,34 +20,12 @@ const Empresa = ({ setIsAuthenticated }) => {
             const data = await response.json();
             setEmpresas(data);
         } else {
-            console.error('Error al obtener productos:', response.status);
+            console.error('Error al obtener datos:', response.status);
         }
     } catch (error) {
         console.error('Error en la solicitud:', error);
     }
   };
-
-  const deleteData = async (id) => {
-    try {   
-        const requestOptions = {
-          method: 'DELETE'
-        };
-
-        const response = await fetch(urlApi + '/' + id);
-        if (response.ok) {
-            obtenerData();
-        } else {
-            console.error('Error al eliminar:', response.status);
-        }
-    } catch (error) {
-        console.error('Error en la solicitud:', error);
-    }
-  };
-
-  useEffect(() => {
-    obtenerData();
-    console.log(empresas);
-  }, []);
 
   const handleEdit = id => {
     const [empresa] = empresas.filter(empresa => empresa.id === id);
@@ -82,6 +60,28 @@ const Empresa = ({ setIsAuthenticated }) => {
     });
   };
 
+  const deleteData = async (id) => {
+    try {   
+        const requestOptions = {
+          method: 'DELETE'
+        };
+
+        const response = await fetch(urlApi + '/' + id, requestOptions);
+        if (response.ok) {
+            obtenerData();
+        } else {
+            console.error('Error al eliminar:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerData();
+  }, []);
+
+  
   return (    
     <div className="container">
       <header>        
@@ -99,6 +99,8 @@ const Empresa = ({ setIsAuthenticated }) => {
       )}
       {isAdding && (
         <EmpresaAdd
+          urlApi={urlApi}
+          loading={obtenerData}
           empresas={empresas}
           setEmpresas={setEmpresas}
           setIsAdding={setIsAdding}

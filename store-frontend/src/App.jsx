@@ -6,15 +6,11 @@ import "./index.css";
 
 const App = () => { 
   return (
-    <div>    
-     
-      <span>texto</span>
-
+    <div>
       <StoreProvider>
         <RouterApp/> 
       </StoreProvider> 
-    </div>
-    
+    </div>    
   );
 };
 

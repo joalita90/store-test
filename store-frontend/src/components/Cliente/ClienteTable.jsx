@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
+const ClienteTable = ({ clientes, handleEdit, handleDelete }) => {
 
   return (
     <div className="contain-table">
@@ -8,29 +8,24 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
         <thead>
           <tr>
             <th>No.</th>
-            <th>Nit</th>
             <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            
+
             <th colSpan={2} className="text-center">
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          {empresas.length > 0 ? (
-            empresas.map((empresa, i) => (
-              <tr key={empresa.id}>
+          {clientes.length > 0 ? (
+            clientes.map((data, i) => (
+              <tr key={data.id}>
                 <td>{i + 1}</td>
-                <td>{empresa.nit}</td>
-                <td>{empresa.name}</td>
-                <td>{empresa.address}</td>                
-                <td>{empresa.phone} </td>
-
+                
+                <td>{data.name}</td>
+                              
                 <td className="text-right">
                   <button
-                    onClick={() => handleEdit(empresa.id)}
+                    onClick={() => handleEdit(data.id)}
                     className="button muted-button"
                   >
                     Editar
@@ -38,7 +33,7 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
                 </td>
                 <td className="text-left">
                   <button
-                    onClick={() => handleDelete(empresa.id)}
+                    onClick={() => handleDelete(data.id)}
                     className="button muted-button"
                   >
                     Eliminar
@@ -57,4 +52,4 @@ const EmpresaTable = ({ empresas, handleEdit, handleDelete }) => {
   );
 };
 
-export default EmpresaTable;
+export default ClienteTable;

@@ -24,9 +24,9 @@ public class Product {
 	private String code;
 	private String name;
 	private String properties;
-	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Price> prices;
+	private float price;
+	//@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Price> prices;
 		
 	@ManyToOne
     @JoinColumn(name = "company_id")
