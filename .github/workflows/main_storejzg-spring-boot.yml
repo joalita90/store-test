@@ -20,15 +20,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-      
-      - name: Change path
-        run: cd /home/runner/work/store-test/store-test/store-backend
-        
-      - name: Change path
-        run: echo $(pwd)
 
       - name: Build with Gradle
-        run: ./gradlew clean build -x test --no-daemon
+        run: |
+          cd ${{ github.workspace }}/store-backend
+          ./gradlew clean build -x test --no-daemon
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
