@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
       
       - name: Build with Gradle
-        run: ./gradle clean build -x test --no-daemon
+        run: ./gradlew clean build -x test --no-daemon
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
