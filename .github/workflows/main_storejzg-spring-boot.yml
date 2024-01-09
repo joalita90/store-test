@@ -20,6 +20,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
+      - name: Enable Bash
+        run: |
+          echo '##[task.setvariable variable=USING_BASH]true'
+          echo '##[task.setvariable variable=SHELL]bash'
 
       - name: Build with Gradle
         run: ./gradlew clean build -x test --no-daemon
