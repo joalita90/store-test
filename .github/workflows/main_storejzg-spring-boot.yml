@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
       
       - name: Change path
-        run: cd store-backend
+        run: cd /home/runner/work/store-test/store-test/store-backend
         
       - name: Change path
         run: echo $(pwd)
