@@ -54,7 +54,7 @@ jobs:
           app_location: ${{ env.APP_LOCATION }}
           api_location: ${{ env.API_LOCATION }}
           app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
-          skip_deploy_on_missing_secrets: true
+          skip_deploy_on_missing_secrets: false
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
