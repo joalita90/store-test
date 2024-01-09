@@ -24,6 +24,7 @@ jobs:
       - name: Build with Gradle
         run: |
           cd ${{ github.workspace }}/store-backend
+          echo $(pwd)
           ./gradlew clean build -x test --no-daemon
 
       - name: Upload artifact for deployment job
