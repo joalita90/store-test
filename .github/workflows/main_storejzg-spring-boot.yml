@@ -21,6 +21,9 @@ jobs:
         with:
           java-version: '17'
       
+      - name: Change path
+        run: cd store-frontend
+
       - name: Build with Gradle
         run: ./gradlew clean build -x test --no-daemon
 
