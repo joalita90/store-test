@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 const ClienteEdit = ({ clientes, selectedCliente, setClientes, setIsEditing }) => {
   const id = selectedCliente.id;
 
-  const [name, setName] = useState(selectedProducto.name);
+    const [name, setName] = useState(selectedCliente.name);
 
   const handleUpdate = e => {
     e.preventDefault();
