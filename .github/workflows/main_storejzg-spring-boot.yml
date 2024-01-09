@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/store-backend/target/*.jar'
+          path: '${{ github.workspace }}/store-backend/build/libs/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: Change app location
         run: |
-          cd ${{ github.workspace }}/store-backend/target/
+          cd ${{ github.workspace }}/store-backend/build/libs/
           echo $(pwd)
           
       - name: Download artifact from build job
