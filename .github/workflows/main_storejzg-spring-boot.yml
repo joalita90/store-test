@@ -20,14 +20,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-      - name: Enable Bash
-        run: |
-          echo '##[task.setvariable variable=USING_BASH]true'
-          echo '##[task.setvariable variable=SHELL]bash'
       
-      - name: Add Gradle to PATH
-        run: echo "export PATH=\$PATH:$(pwd)/gradle/bin" >> $GITHUB_ENV
-
       - name: Build with Gradle
         run: ./gradle clean build -x test --no-daemon
 
