@@ -22,6 +22,9 @@ jobs:
           java-version: '17'
       
       - name: Change path
+        run: cd store-backend
+        
+      - name: Change path
         run: echo $(pwd)
 
       - name: Build with Gradle
