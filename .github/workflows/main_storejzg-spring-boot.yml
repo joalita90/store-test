@@ -42,11 +42,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
-      - name: Change app location
-        run: |
-          cd ${{ github.workspace }}/store-backend/build/libs/
-          echo $(pwd)
-          
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
