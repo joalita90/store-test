@@ -9,7 +9,7 @@ El proyecto esta dividido en dos partes:
 1. store-backend
    Aqui encontramos toda la logica de negocio para el proyecto, esta construido con una arquitectura de microservicios.
 
-   #Modelo Entidad-Relacion
+   # Modelo Entidad-Relacion
    ![image](https://github.com/joalita90/store-test/assets/155872863/1712e628-2084-413d-9bb2-953fe03d27a0)
 
 
