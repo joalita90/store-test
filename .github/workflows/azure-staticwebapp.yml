@@ -26,7 +26,6 @@ env:
   APP_ARTIFACT_LOCATION: "build" # location of client code build output
   AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing deployment token for your static web app
   CI: false
-  skip_deploy_on_missing_secrets: true
 
 permissions:
   contents: read
@@ -55,7 +54,6 @@ jobs:
           app_location: ${{ env.APP_LOCATION }}
           api_location: ${{ env.API_LOCATION }}
           app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
-        env:
           skip_deploy_on_missing_secrets: true
           ###### End of Repository/Build Configurations ######
 
