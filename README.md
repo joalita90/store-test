@@ -8,7 +8,15 @@ El proyecto esta dividido en dos partes:
 
 1. store-backend
    Aqui encontramos toda la logica de negocio para el proyecto, esta construido con una arquitectura de microservicios.
-   Podemos encontrar las siguientes capas
-     - Accesos a Datos
-     - Servicios
-     - Controladores
+
+2. store-frontend
+   Aqui encontramos toda la parte correspondiente al front de la aplicación
+
+# Tecnologías Utilizadas:
+- React js
+- Spring Boot
+- Gradle
+- Java 17
+- MySql
+
+
