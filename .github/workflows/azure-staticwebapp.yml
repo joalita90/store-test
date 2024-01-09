@@ -22,7 +22,6 @@ on:
 # Environment variables available to all jobs and steps in this workflow
 env:
   APP_LOCATION: "/store-frontend" # location of your client code
-  API_LOCATION: "api" # location of your api source code - optional
   APP_ARTIFACT_LOCATION: "build" # location of client code build output
   CI: false
   DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}
