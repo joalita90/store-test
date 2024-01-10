@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const apiUrl = 'http://localhost:8080/api/users/login?'; //username=joally.admin&password=admin'
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Aquí deberías realizar una solicitud a tu API para autenticar al usuario
-        // Puedes usar fetch() u otra biblioteca como axios
-
         try {
             const response = await fetch('http://localhost:8080/api/login', {
                 method: 'POST',
@@ -42,12 +39,12 @@ const Login = ({ onLogin }) => {
         <div class='login'>
             <h2>Iniciar Sesión</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Correo:</label>
+                <label htmlFor="email">Usuario:</label>
                 <input
                     type="text"
                     id="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                 />
 
