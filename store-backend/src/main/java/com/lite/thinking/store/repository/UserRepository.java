@@ -7,5 +7,7 @@ import com.lite.thinking.store.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+	
+	User findByUsername(final String userName);
 
 }

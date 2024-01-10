@@ -1,14 +1,15 @@
 package com.lite.thinking.store.services;
 
 import java.util.List;
-import com.lite.thinking.store.model.User;
+
+import com.lite.thinking.store.dto.UserDto;
 
 public interface UserService {
 	
-	List<User> getAllUsers();
-    User save(final User user);
-    User getById(final int id);
-    User update(final int id, final User user);
+	List<UserDto> getAllUsers();
+	UserDto save(final UserDto user);
+	UserDto getById(final int id);
+	UserDto update(final int id, final UserDto user);
     void delete(final int id);
-
+    UserDto login(final String userName, final String password);
 }
